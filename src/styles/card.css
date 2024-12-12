@@ -1,0 +1,60 @@
+:root {
+  --space: 1rem;
+  --bg: #09090b;
+  --fg: #e3e3e3;
+  --surface-1: #101012;
+  --surface-2: #27272a;
+  --surface-3: #52525b;
+  --ease-out: cubic-bezier(0.5, 1, 0.89, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-areas: "card";
+  place-items: center;
+  aspect-ratio: 4/5;
+  border: 1px solid var(--surface-2);
+  isolation: isolate;
+  transition: border-color 200ms var(--ease-out);
+  user-select: none;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at bottom left,
+    transparent 55%,
+    var(--surface-1)
+  );
+  pointer-events: none;
+  box-shadow: var(--bg) -0.5cqi 0.5cqi 2.5cqi inset;
+  transition: opacity 900ms var(--ease-out);
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, var(--bg), transparent 65%);
+  opacity: 0;
+  transition: opacity 800ms var(--ease-out);
+}
+
+.card > * {
+  grid-area: card;
+}
+
+.card:hover::before {
+  opacity: 0;
+}
+
+.card:hover::after {
+  opacity: 1;
+}
